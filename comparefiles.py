@@ -31,12 +31,21 @@ def conv_file_to_list(dataFrame) -> list:
     return newList
 
 
-def compare_lists(list1, list2) -> list:
-    match_list = []
-    for item in list1:
-        for value in list2:
-            if item == value:
-                match_list.append(value)
+# def compare_lists(list1, list2) -> list:
+#     match_list = []
+#     for item in list1:
+#         for value in list2:
+#             if item == value:
+#                 match_list.append(value)
+#     return match_list
+
+
+def find_match_two_lists(list1, list2) -> list:
+    set_one = set(list1)
+    set_two = set(list2)
+
+    match_list = list(set_one.intersection(set_two))
+
     return match_list
 
 
@@ -57,7 +66,7 @@ def main():
     xcl_2 = read_dataframe('applist2.xlsx')
     final_list2 = conv_file_to_list(xcl_2)
 
-    match_found = compare_lists(final_list1, final_list2)
+    match_found = find_match_two_lists(final_list1, final_list2)
     write_to_excel(match_found)
 
     print(time.process_time() - start)
